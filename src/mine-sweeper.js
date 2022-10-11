@@ -23,9 +23,99 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(arr) {
+  let array = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    array.push(arr[i].slice());
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      array[i][j] = 0;
+    }
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if (i === 0) {
+        if (j === 0) {
+          if (arr[i][j]) {
+            array[0][1]++;
+            array[1][0]++;
+            array[1][1]++;
+          }
+        } else if (j === arr[i].length - 1) {
+          if (arr[i][j]) {
+            array[0][j - 1]++;
+            array[1][j]++;
+            array[1][j - 1]++;
+          }
+        } else {
+            if (arr[i][j]) {
+                array[0][j - 1]++;
+                array[0][j + 1]++;
+                array[1][j]++;
+                array[1][j - 1]++;
+                array[1][j + 1]++;
+              }
+        }
+      } else if ( i === arr.length - 1) {
+        if (j === 0) {
+            if (arr[i][j]) {
+              array[i][1]++;
+              array[i - 1][0]++;
+              array[i - 1][1]++;
+            }
+          } else if (j === arr[i].length - 1) {
+            if (arr[i][j]) {
+              array[i][j - 1]++;
+              array[i - 1][j]++;
+              array[i - 1][j - 1]++;
+            }
+          } else {
+              if (arr[i][j]) {
+                  array[i][j - 1]++;
+                  array[i][j + 1]++;
+                  array[i - 1][j]++;
+                  array[i - 1][j - 1]++;
+                  array[i - 1][j + 1]++;
+                }
+          }
+      } else {
+        if (j === 0) {
+            if (arr[i][j]) {
+              array[i][1]++;
+              array[i - 1][0]++;
+              array[i - 1][1]++;
+              array[i + 1][0]++;
+              array[i + 1][1]++;
+            }
+          } else if (j === arr[i].length - 1) {
+            if (arr[i][j]) {
+              array[i][j - 1]++;
+              array[i - 1][j]++;
+              array[i - 1][j - 1]++;
+              array[i + 1][j]++;
+              array[i + 1][j - 1]++;
+            }
+          } else {
+              if (arr[i][j]) {
+                  array[i][j - 1]++;
+                  array[i][j + 1]++;
+                  array[i - 1][j]++;
+                  array[i - 1][j - 1]++;
+                  array[i - 1][j + 1]++;
+                  array[i + 1][j]++;
+                  array[i + 1][j - 1]++;
+                  array[i + 1][j + 1]++;
+                }
+          }
+
+      }
+    }
+  }
+  return array;
 }
 
 module.exports = {
